@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sk162-myfirst-ingress
+  labels:
+    app: sk162-myfirst-ingress
+spec:
+  ingressClassName: public-nginx
+  rules:
+    - host: sk162-myfirst-ingress.class-5.skala-ai.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sk162-myfirst-api-server
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - sk162-myfirst-ingress.class-5.skala-ai.com
+      secretName: wildcard-class-5-skala-ai-com-tls
